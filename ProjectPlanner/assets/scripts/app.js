@@ -3,26 +3,50 @@ class finishProject {
     // constructor () {
     //     this.finishProject();
     // }
-    printClickFinish(){
-        const backgroundModal = document.createElement('div');
-        backgroundModal.setAttribute('id','backdrop');
-        document.body.append(backgroundModal);
+    // printClickFinish(){
+    //     const backgroundModal = document.createElement('div');
+    //     backgroundModal.setAttribute('id','backdrop');
+    //     document.body.append(backgroundModal);
+    // }
+    // toggleBackdrop() {
+    //     BackDrop.classList.toggle("visible");
+    //     console.log("clickback");
+    // }
+    cnsl () {
+        console.log('click NO');
+        console.log(this);
     }
 
     finishProject() {
-        const backgroundModal = document.createElement('div');
-        backgroundModal.setAttribute('id','backdrop'); 
+        // const toggleBackdrop = function () {
+        //     console.log("clickback");
+        //     // backdrop.classList.toggle("visible");
+        // }
+
+        // consoleClick = this.consoleClick
+
+        const backdrop = document.createElement('div');
+        backdrop.setAttribute('id','backdrop');
         console.log('click')
-        backgroundModal.innerHTML = `
-        <div class='modal'>
+        const modalFinish = document.createElement('div');
+        modalFinish.setAttribute('class','modal'); 
+        modalFinish.innerHTML = `
                 <span class = "question-text">Are you really want to finish this cource?</span>
                 <div class= "btn-finish">
-                <button class="btn btn--passive">No</button>
-                <button class="btn btn--success">Yes</button>
+                    <button id="no-finish"class="btn btn--passive">No</button>
+                    <button id="yes-finish" class="btn btn--success">Yes</button>
                 </div>
-        </div>
-        `
-        document.body.append(backgroundModal); 
+            `
+        document.body.append(backdrop);
+        backdrop.append(modalFinish);
+
+        const backdropGray = document.getElementById('backdrop')
+        const btnNoFinish = document.getElementById('no-finish');
+        console.log(btnNoFinish)
+        btnNoFinish.addEventListener('click',this.cnsl.bind(this))
+        btnNoFinish.focus();
+        // btnNoFinish.addEventListener('click',toggleBackdrop)
+        // console.log(backdropGray, btnNoFinish)
     }
 }
 // const p = new finishProject();
@@ -49,7 +73,7 @@ class ButtonsEvents extends finishProject {
         console.log(activeProjectsBtnsArr)
         activeProjectsBtnsArr.forEach((elem) => {
             if (elem.textContent === 'Finish'){
-                elem.addEventListener('click',this.finishProject)
+                elem.addEventListener('click',this.finishProject.bind(this))
                 console.log(elem);
             }
             if (elem.textContent === 'More Info'){
@@ -68,6 +92,9 @@ const project = new ButtonsEvents();
 project.PageButtons()
 console.log(project)
 
+
+// const Fn = new finishProject()
+// Fn.finishProject();
 class FinishButtons {
     
 

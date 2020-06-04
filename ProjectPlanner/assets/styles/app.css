@@ -125,13 +125,36 @@ button:active {
   margin: 0;
 }
 
+#backdrop {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: all; /* включает доступность этого и дочерних элементов и недоступность элементов под ним*/
+}
+
+#backdrop.visible {
+  display: block;
+  pointer-events: none;
+}
+
 .modal {
+  position: relative;
+  z-index:1010;
   width: 600px;
-  height: 110px;
+  height: 150px;
   border-radius: 5px;
   margin: auto;
   display: flex;
-  background: #fff;
+  background:white;
   flex-direction: column; 
   align-items:flex-end;
   /* justify-content: flex-start; */
@@ -172,7 +195,7 @@ button:active {
   text-align: center;
   width: 100%;
   height: 40px;
-  /* justify-content: center; */
+  justify-content: center;
   align-self: center;
   margin: 20px 10px 0px 10px;
 }
@@ -182,7 +205,7 @@ button:active {
   display: flex;
   border: black ;
   width: 600px;
-  height: 60px;
+  height: 100%;
   /* margin: 1px 1px 1px 1px; */
   justify-content:center;
   align-items: center;
@@ -203,7 +226,8 @@ button:active {
 
 .btn--passive:hover,
 .btn--passive:active {
-  background: #aec6f8;
+  background: #b62804;
+  border-color: #000000;
 }
 
 .btn--success {
@@ -222,23 +246,6 @@ button:active {
 
 .btn--success:hover,
 .btn--success:active {
-  background: #ff3217;
-  border-color: #ff3217;
-}
-
-#backdrop {
-  position: fixed;
-  width: 100%;
-  display: flex;
-  height: 100vh;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.75);
-  z-index: 10;
-  pointer-events: none;
-}
-
-#backdrop.visible {
-  display: block;
-  pointer-events: none;
+  background: #41a833;
+  border-color: #000000;
 }
