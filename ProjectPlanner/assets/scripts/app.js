@@ -12,22 +12,29 @@ class finishProject {
     //     BackDrop.classList.toggle("visible");
     //     console.log("clickback");
     // }
-    cnsl () {
-        console.log('click NO');
-        console.log(this);
+
+    backdrop(){
+        
+    }
+    toggleBackdrop() {
+            console.log("clickback");
+            this.finishProject.backdropGray.setAttribute('class','visible')
+        }
+
+    cnslNO () {
+        console.log('click NO')
+    }
+    cnslYes () {
+        console.log('click YES')
+    }
+    cnslBACK () {
+        console.log('click BACKDROP')
     }
 
     finishProject() {
-        // const toggleBackdrop = function () {
-        //     console.log("clickback");
-        //     // backdrop.classList.toggle("visible");
-        // }
-
-        // consoleClick = this.consoleClick
-
         const backdrop = document.createElement('div');
         backdrop.setAttribute('id','backdrop');
-        console.log('click')
+        console.log('click Finish')
         const modalFinish = document.createElement('div');
         modalFinish.setAttribute('class','modal'); 
         modalFinish.innerHTML = `
@@ -38,19 +45,20 @@ class finishProject {
                 </div>
             `
         document.body.append(backdrop);
-        backdrop.append(modalFinish);
-
+        document.getElementById('backdrop').append(modalFinish);
+        // backdrop.classList.toggle("visible");
         const backdropGray = document.getElementById('backdrop')
         const btnNoFinish = document.getElementById('no-finish');
+        const btnYesFinish = document.getElementById('yes-finish');
         console.log(btnNoFinish)
-        btnNoFinish.addEventListener('click',this.cnsl.bind(this))
-        btnNoFinish.focus();
+        btnNoFinish.addEventListener('click',this.cnslNO.bind(this))
+        btnYesFinish.addEventListener('click',this.cnslYes.bind(this))
+        backdropGray.addEventListener('click',this.toggleBackdrop.bind(this))
+        // btnNoFinish.focus()
         // btnNoFinish.addEventListener('click',toggleBackdrop)
         // console.log(backdropGray, btnNoFinish)
     }
 }
-// const p = new finishProject();
-// p.printClickFinish();
 
 
 class ButtonsEvents extends finishProject {
@@ -73,7 +81,7 @@ class ButtonsEvents extends finishProject {
         console.log(activeProjectsBtnsArr)
         activeProjectsBtnsArr.forEach((elem) => {
             if (elem.textContent === 'Finish'){
-                elem.addEventListener('click',this.finishProject.bind(this))
+                elem.addEventListener('click', this.finishProject.bind(this))
                 console.log(elem);
             }
             if (elem.textContent === 'More Info'){
@@ -104,6 +112,3 @@ class FinishButtons {
     //     console.log(finisBtn)
     // }
 }
-
-
-
