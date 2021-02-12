@@ -10,6 +10,7 @@ class DOMHelper {
     const element = document.getElementById(elementId);
     const destinationElment = document.querySelector(newDestinationSelector);
     destinationElment.append(element);
+    element.scrollIntoView({behavior:'smooth'})
   }
 }
 
@@ -34,8 +35,8 @@ class Component {
 }
 
 class Tooltip extends Component {
-  constructor(closeNotifierFn, tooltipText){
-    super();
+  constructor(closeNotifierFn, tooltipText, hostElementId){
+    super(hostElementId);
     this.tooltipText = tooltipText;
     this.closeNotifier = closeNotifierFn;
     this.create();
@@ -50,7 +51,26 @@ class Tooltip extends Component {
   create() {
     const tooltipElement = document.createElement('div');
     tooltipElement.className = 'card';
-    tooltipElement.textContent = this.tooltipText;
+    const tooltipTemplate = document.getElementById('tooltip');
+    const tooltipBody = document.importNode(tooltipTemplate.content, true);
+    tooltipElement.append(tooltipBody);
+    tooltipElement.querySelector('p').textContent = this.tooltipText;
+    
+
+    const hostElPsLeft = this.hostElement.offsetLeft;
+    const hostElPsTop = this.hostElement.offsetTop;
+    const hostElHeight = this.hostElement.clientHeight;
+    const parenElementScrolling = this.hostElement.parentElement.scrollTop;
+
+    const x = hostElPsLeft + 20;
+    const y = hostElPsTop + hostElHeight -10 -parenElementScrolling;
+    
+    tooltipElement.style.position = 'absolute';
+    tooltipElement.style.backgroundColor = 'light_blue';
+    tooltipElement.style.left = x + 'px';
+    tooltipElement.style.top = y + 'px';
+    
+    console.log(this.hostElement.getBoundingClientRect())
     tooltipElement.addEventListener('click', this.closeTooltip);
     this.element = tooltipElement;
   }
@@ -79,7 +99,7 @@ class ProjectItem {
     console.log(tooltipText)
     const tooltip = new Tooltip(() =>{
       this.hasActiveTooltip = false;
-    }, tooltipText);
+    }, tooltipText, this.id);
     tooltip.attach();
     this.hasActiveTooltip = true;
   }
@@ -94,7 +114,7 @@ class ProjectItem {
     const projectItemElement = document.getElementById(this.id);
     let switchBtn = projectItemElement.querySelector("button:last-of-type");
     switchBtn = DOMHelper.clearEventListener(switchBtn);
-    switchBtn.textContent = type === "active" ? "Finish" : "Active";
+    switchBtn.textContent = type === "active" ? "Finish" : "Activate";
     switchBtn.addEventListener("click", this.updateProjectListHandler.bind(null, this.id));
     // console.log(switchBtn);
     // return switchBtn;
@@ -143,6 +163,20 @@ class App {
     const finishedProjectList = new ProjectList("finished");
     activeProjectList.setSwitchHandlerFunction(finishedProjectList.addProject.bind(finishedProjectList));
     finishedProjectList.setSwitchHandlerFunction(activeProjectList.addProject.bind(activeProjectList));
+
+
+    const timerId = setTimeout(()=>{this.startAnalitycs()}, 2000)
+
+    document.getElementById("stop-analytics").addEventListener('click',()=>{
+      clearTimeout(timerId);
+    });
+  }
+
+  static startAnalitycs() {
+    const analyticScript = document.createElement('script');
+    analyticScript.src = 'assets/scripts/analytics.js';
+    analyticScript.defer = true;
+    document.head.append(analyticScript);
   }
 }
 
