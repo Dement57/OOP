@@ -29,15 +29,16 @@ class Component {
   }
   
   attach() {
-    this.hostElement.insertAdjacentElement(this.insertBefore ? 'beforebegin':'beforeend', this.element)
+    this.hostElement.insertAdjacentElement(this.insertBefore ? 'afterbegin':'beforeend', this.element)
   }
 }
 
 class Tooltip extends Component {
-  constructor(closeNotifierFn, hostElement){
-    super(hostElement);
+  constructor(closeNotifierFn, tooltipText){
+    super();
+    this.tooltipText = tooltipText;
     this.closeNotifier = closeNotifierFn;
-    this.create()
+    this.create();
 
   }
 
@@ -49,7 +50,7 @@ class Tooltip extends Component {
   create() {
     const tooltipElement = document.createElement('div');
     tooltipElement.className = 'card';
-    tooltipElement.textContent = 'MORE INFO TEXT HERE';
+    tooltipElement.textContent = this.tooltipText;
     tooltipElement.addEventListener('click', this.closeTooltip);
     this.element = tooltipElement;
   }
@@ -73,7 +74,12 @@ class ProjectItem {
     if (this.hasActiveTooltip){
       return;
     }
-    const tooltip = new Tooltip(this.setTooltipFalse(), this.paren);
+    const projectElement = document.getElementById(this.id);
+    const tooltipText = projectElement.dataset.extraInfo;
+    console.log(tooltipText)
+    const tooltip = new Tooltip(() =>{
+      this.hasActiveTooltip = false;
+    }, tooltipText);
     tooltip.attach();
     this.hasActiveTooltip = true;
   }
@@ -81,7 +87,7 @@ class ProjectItem {
   connectMoreInfoButton() {
     const projectItemElement = document.getElementById(this.id);
     let moreInfoBtn = projectItemElement.querySelector("button:first-of-type");
-    moreInfoBtn.addEventListener('click', this.showMoreInfoHandler);
+    moreInfoBtn.addEventListener('click', this.showMoreInfoHandler.bind(this));
   }
 
   connectSwitchButton(type) {
