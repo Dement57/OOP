@@ -1,4 +1,4 @@
-const buttons = document.querySelectorAll('button')
+const button = document.querySelector('button')
 
 // button.addEventListener('click', ()=>{console.log('click')})
 // button.addEventListener('dblclick', ()=>{console.log('double click')})
@@ -35,3 +35,33 @@ form.addEventListener('submit', event => {
     console.log(event);
 })
 
+const div = document.querySelector('div');
+div.addEventListener('mouseenter', event => {
+    console.log('DIV EVENT >>>' + event)
+})
+
+button.addEventListener('mouseenter', event => {
+    event.stopPropagation()
+    // event.stopImmediatePropagation()
+    console.log('BUTTON EVENT >>>>'+ event);
+})
+
+// button.addEventListener('click', event => {
+//     // event.stopPropagation()
+//     // event.stopImmediatePropagation()
+//     console.log('BUTTON EVENT 2 >>>>'+ event);
+// })
+
+const liItems = document.querySelectorAll('li')
+const list = document.querySelector('ul')
+
+// liItems.forEach(li =>{
+//     li.addEventListener('click', event=>{
+//         event.target.classList.toggle('highlight');
+//     })
+// })
+
+list.addEventListener('click', event => {
+    // event.target.classList.toggle('highlight');
+    event.target.closest('li').classList.toggle('highlight');
+})
