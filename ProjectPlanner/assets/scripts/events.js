@@ -40,10 +40,11 @@ div.addEventListener('mouseenter', event => {
     console.log('DIV EVENT >>>' + event)
 })
 
-button.addEventListener('mouseenter', event => {
+button.addEventListener('click', function(event) {
     event.stopPropagation()
     // event.stopImmediatePropagation()
     console.log('BUTTON EVENT >>>>'+ event);
+    console.log(this)
 })
 
 // button.addEventListener('click', event => {
@@ -61,7 +62,10 @@ const list = document.querySelector('ul')
 //     })
 // })
 
-list.addEventListener('click', event => {
+list.addEventListener('click',function(event) {
     // event.target.classList.toggle('highlight');
     event.target.closest('li').classList.toggle('highlight');
+    // form.submit();
+    button.click();
+    console.log(this)
 })
