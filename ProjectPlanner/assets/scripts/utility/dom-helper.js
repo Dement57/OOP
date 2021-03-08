@@ -1,3 +1,6 @@
+console.log('DOM helper execution!!')
+
+
 export class DOMHelper {
   static clearEventListener(element) {
     const clonedElement = element.cloneNode(true);
