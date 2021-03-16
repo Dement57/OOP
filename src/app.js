@@ -1,5 +1,6 @@
 // globalThis.DEFAULT_VALUE = 'VOVA!!';
-import { ProjectList } from './app/project-list.js';
+import * as _ from 'lodash';
+import { ProjectList } from './app/project-list';
 
 
 class App {

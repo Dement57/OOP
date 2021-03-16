@@ -1,4 +1,4 @@
-import Cmp from "./component.js";
+import Cmp from "./component";
 // const Component = new Component();
 
 console.log("Tooltip Running!!");
@@ -8,13 +8,13 @@ export class Tooltip extends Cmp {
     super(hostElementId);
     this.tooltipText = tooltipText;
     this.closeNotifier = closeNotifierFn;
+    this.closeTooltip = ()=> {
+      this.detach();
+      this.closeNotifier();
+    };
     this.create();
   }
 
-  closeTooltip() {
-    this.detach();
-    this.closeNotifier();
-  }
 
   create() {
     const tooltipElement = document.createElement("div");
@@ -38,7 +38,7 @@ export class Tooltip extends Cmp {
     tooltipElement.style.top = y + "px";
 
     console.log(this.hostElement.getBoundingClientRect());
-    tooltipElement.addEventListener("click", this.closeTooltip);
+    tooltipElement.addEventListener("click2", this.closeTooltip);
     this.element = tooltipElement;
   }
 }

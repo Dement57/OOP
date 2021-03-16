@@ -1,7 +1,7 @@
-import { ProjectItem as PrjItem } from "./project-item.js";
-import * as DOMH from "../utility/dom-helper.js";
+import { ProjectItem as PrjItem } from "./project-item";
+import * as DOMH from "../utility/dom-helper";
 
-// console.log(this);
+console.log('PROJECT LIST!');
 
 export class ProjectList {
   constructor(type) {

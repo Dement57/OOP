@@ -1,5 +1,4 @@
-console.log('DOM helper execution!!')
-
+// console.log("DOM helper execution!!");
 
 export class DOMHelper {
   static clearEventListener(element) {
