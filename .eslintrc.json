@@ -10,6 +10,7 @@
     },
     "rules": {
         "semi": "error",
-        "wrap-regex": "error"
+        "wrap-regex": "error",
+        "no-undef":"off"
     }
 }

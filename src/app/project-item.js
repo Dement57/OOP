@@ -1,7 +1,7 @@
 // import { Tooltip } from './tooltip.js';
-import { DOMHelper } from "../utility/dom-helper.js";
+import { DOMHelper } from "../utility/dom-helper";
 
-console.log("Project Item created!!!");
+// console.log("Project Item created!!!");
 
 export class ProjectItem {
   constructor(id, updateProjectListFunction, type) {
@@ -24,7 +24,7 @@ export class ProjectItem {
     const projectElement = document.getElementById(this.id);
     const tooltipText = projectElement.dataset.extraInfo;
     console.log(tooltipText);
-    import("./tooltip.js").then((module) => {
+    import("./tooltip").then((module) => {
       const tooltip = new module.Tooltip(
         () => {
           this.hasActiveTooltip = false;
@@ -44,10 +44,10 @@ export class ProjectItem {
       event.dataTransfer.effectAllowed = "move"; //define what kind of operation can be used. Here we can move our data
     });
     item.addEventListener("dragend", (event) => {
-      console.log("THE END OF DRAG>>>");
+      console.log("THE END OF DRAG!>>>");
       console.log(event);
       if (event.dataTransfer.dropEffect === "none") {
-        alert("Project have not moved, try one more time!");
+        alert("Project have not moved, try one more time!!!");
       }
     });
   }
