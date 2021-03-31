@@ -38,7 +38,7 @@ export class Tooltip extends Cmp {
     tooltipElement.style.top = y + "px";
 
     console.log(this.hostElement.getBoundingClientRect());
-    tooltipElement.addEventListener("click2", this.closeTooltip);
+    tooltipElement.addEventListener("click", this.closeTooltip);
     this.element = tooltipElement;
   }
 }

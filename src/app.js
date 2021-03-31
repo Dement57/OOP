@@ -2,6 +2,7 @@
 import * as _ from 'lodash';
 import { ProjectList } from './app/project-list';
 
+console.log(_.difference(['Vova', 'Alina', 'Alexandr'],['Vova','Alina']));
 
 class App {
   static init() {
